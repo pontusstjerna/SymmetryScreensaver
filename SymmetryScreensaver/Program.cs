@@ -42,7 +42,7 @@ namespace SymmetryScreensaver
                         break;
                     case "/s": //Fullscreen mode
                         ShowScreenSaver();
-                        Application.Run(new SymmetryScr());
+                        Application.Run();
                         break;
                     default:
                         MessageBox.Show("Invalid argument!", "Symmetry Screensaver",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
@@ -58,7 +58,7 @@ namespace SymmetryScreensaver
 
         static void ShowScreenSaver()
         {
-            foreach(Screen screen in Screen.AllScreens)
+            foreach (Screen screen in Screen.AllScreens)
             {
                 SymmetryScr scr = new SymmetryScr(screen.Bounds); //Start with constructor to adjust to screen size
                 scr.Show();
