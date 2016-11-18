@@ -1,0 +1,9 @@
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\bin\Debug\SymmetryScreensaver.exe.config
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\bin\Debug\SymmetryScreensaver.exe
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\bin\Debug\SymmetryScreensaver.pdb
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Debug\SymmetryScreensaver.csprojResolveAssemblyReference.cache
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Debug\SymmetryScreensaver.SymmetryScr.resources
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Debug\SymmetryScreensaver.Properties.Resources.resources
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Debug\SymmetryScreensaver.csproj.GenerateResource.Cache
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Debug\SymmetryScreensaver.exe
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Debug\SymmetryScreensaver.pdb
