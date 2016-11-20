@@ -13,20 +13,19 @@ namespace SymmetryScreensaver
 
         public float Thickness { get; set; } = 0.13f;
         public bool ChangeColorEnabled { get; set; } = true;
-        public int[] rgbColor { set; get; }
         public Point Start { get; }
         public Point End { get; }
 
+        private int[] rgbColor { set; get; }
         private int alpha = 255;
-        private int change = 1;
+        private int change = -1;
         private int rSpeed = 6;
-        private bool showRgb = false;
         private int[] cIntervals;
 
-        private Random rand = new Random();
+        private Random rand;
         private int speed;
 
-        public Edge(Point start, Point end)
+        public Edge(Point start, Point end, int seed)
         {
             cIntervals = new int[] {
                 100, 130,  //Red min max
@@ -35,7 +34,8 @@ namespace SymmetryScreensaver
 
             rgbColor = new int[] { cIntervals[1], cIntervals[3], cIntervals[5] };
 
-            speed = rand.Next(rSpeed);
+            rand = new Random(seed);
+            speed = rand.Next(0,rSpeed);
 
             this.Start = start;
             this.End = end;
@@ -44,6 +44,21 @@ namespace SymmetryScreensaver
         public int GetAlpha()
         {
             return ColorSafe(alpha);
+        }
+
+        public int GetR()
+        {
+            return ColorSafe(rgbColor[0]);
+        }
+
+        public int GetG()
+        {
+            return ColorSafe(rgbColor[1]);
+        }
+
+        public int GetB()
+        {
+            return ColorSafe(rgbColor[2]);
         }
 
         private int ColorSafe(int colValue)
@@ -77,17 +92,17 @@ namespace SymmetryScreensaver
                 }
             }
 
-            alpha += change * speed;
+            alpha += (change * speed);
 
             if (alpha > 250)
             {
                 change = -1;
-                speed = rand.Next(rSpeed);
+                //speed = rand.Next(0,rSpeed);
             }
             else if (alpha < 10)
             {
                 change = 2;
-                speed = rand.Next(rSpeed);
+                //speed = rand.Next(0,rSpeed);
             }
         }
 

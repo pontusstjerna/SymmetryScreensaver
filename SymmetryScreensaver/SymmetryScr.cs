@@ -25,8 +25,6 @@ namespace SymmetryScreensaver
         public SymmetryScr(Rectangle Bounds) : this()
         {
             this.Bounds = Bounds;
-            graph = new Animation(Bounds.Width/2, 0);
-            graphics = CreateGraphics();
         }
 
         private void SymmetryScr_Load(object sender, EventArgs e)
@@ -35,7 +33,21 @@ namespace SymmetryScreensaver
             Cursor.Hide();
             TopMost = true;
 
-            //Start animation timer
+            //Setup graph
+            graph = new Animation(Bounds.Width / 2, 0);
+            graph.CreateStdGraph(Bounds.Width, Bounds.Height);
+            graphics = this.CreateGraphics();
+            graph.SetColor(Edge.Colors.BLUE);
+            graph.SetThickness(0.05f);
+            graph.EnableColorChange(true);
+
+            DoubleBuffered = true;
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.SymmetryScr_Paint);
+
+            //Setup animation timer
+            timer = new Timer();
+            timer.Interval = 50;
+            timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
         }
 
@@ -65,18 +77,29 @@ namespace SymmetryScreensaver
 
         private void timer_Tick(object sender, EventArgs e)
         {
-            for (int i = 0; i < graph.Edges.Length; i++)
+            Invalidate(true);
+        }
+
+        private Pen GetPen(int i)
+        {
+            graph.Edges[i].ChangeColor();
+            
+            Pen pen = new Pen(
+            Color.FromArgb(
+                graph.Edges[i].GetAlpha(),
+                graph.Edges[i].GetR(),
+                graph.Edges[i].GetG(),
+                graph.Edges[i].GetB()),
+                graph.Edges[i].Thickness);
+
+            return pen;
+        }
+
+        private void SymmetryScr_Paint(object sender, PaintEventArgs e)
+        {
+            for(int i = 0; i < graph.Edges.Length; i++)
             {
-                graph.Edges[i].ChangeColor();
-
-                Pen pen = new Pen(
-                    Color.FromArgb(
-                    graph.Edges[i].rgbColor[0],
-                    graph.Edges[i].rgbColor[1],
-                    graph.Edges[i].rgbColor[2]),
-                    graph.Edges[i].Thickness);
-
-                graphics.DrawLine(pen, graph.Edges[i].Start, graph.Edges[i].End);
+                e.Graphics.DrawLine(GetPen(i), graph.Edges[i].Start, graph.Edges[i].End);
             }
         }
     }

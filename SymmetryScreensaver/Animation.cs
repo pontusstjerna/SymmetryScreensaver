@@ -21,9 +21,9 @@ namespace SymmetryScreensaver
             this.origin[1] = originY;
         }
 
-        void CreateStdGraph(int width, int height)
+        public void CreateStdGraph(int width, int height)
         {
-
+            Random rand = new Random();
             const int scaleF = 23;
             scale = Math.Min(width, height) / scaleF;
             int yOffset = (height / 2) - ((20 * scale) / 2);
@@ -41,18 +41,18 @@ namespace SymmetryScreensaver
                      new Point(x + 9 * scale, y + 6 * scale)};//5
 
             Edges = new Edge[]{
-                new Edge(vertices[0], vertices[1]),//1
-                new Edge(vertices[1], vertices[2]),//2
-                new Edge(vertices[1], vertices[3]),//3
-                new Edge(vertices[1], vertices[4]),//4
-                new Edge(vertices[0], vertices[3]),//5
-                new Edge(vertices[0], vertices[4]),//6
-                new Edge(vertices[0], vertices[5]),//7
-                new Edge(vertices[4], vertices[3]),//8
-                new Edge(vertices[5], vertices[3]),//9
-                new Edge(vertices[4], vertices[5]),//10
-                new Edge(vertices[5], vertices[2]),//11
-                new Edge(vertices[3], vertices[2])//12
+                new Edge(vertices[0], vertices[1], rand.Next()),//1
+                new Edge(vertices[1], vertices[2], rand.Next()),//2
+                new Edge(vertices[1], vertices[3], rand.Next()),//3
+                new Edge(vertices[1], vertices[4], rand.Next()),//4
+                new Edge(vertices[0], vertices[3], rand.Next()),//5
+                new Edge(vertices[0], vertices[4], rand.Next()),//6
+                new Edge(vertices[0], vertices[5], rand.Next()),//7
+                new Edge(vertices[4], vertices[3], rand.Next()),//8
+                new Edge(vertices[5], vertices[3], rand.Next()),//9
+                new Edge(vertices[4], vertices[5], rand.Next()),//10
+                new Edge(vertices[5], vertices[2], rand.Next()),//11
+                new Edge(vertices[3], vertices[2], rand.Next())//12
         };
         }
 
