@@ -1,0 +1,10 @@
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\bin\Release\SymmetryScreensaver.exe.config
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\bin\Release\SymmetryScreensaver.exe
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\bin\Release\SymmetryScreensaver.pdb
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Release\SymmetryScreensaver.Settings.resources
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Release\SymmetryScreensaver.SymmetryScr.resources
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Release\SymmetryScreensaver.Properties.Resources.resources
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Release\SymmetryScreensaver.csproj.GenerateResource.Cache
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Release\SymmetryScreensaver.exe
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Release\SymmetryScreensaver.pdb
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Release\SymmetryScreensaver.csprojResolveAssemblyReference.cache

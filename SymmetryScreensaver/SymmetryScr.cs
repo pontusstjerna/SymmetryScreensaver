@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,6 +17,21 @@ namespace SymmetryScreensaver
 
         private Animation graph;
         private Graphics graphics;
+        private bool previewMode = false;
+
+
+        [DllImport("user32.dll")]
+        static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+
+        [DllImport("user32.dll")]
+        static extern int SetWindowLong(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        static extern bool GetClientRect(IntPtr hWnd, out Rectangle lpRect);
+
 
         public SymmetryScr()
         {
@@ -27,18 +43,69 @@ namespace SymmetryScreensaver
             this.Bounds = Bounds;
         }
 
+        //For preview
+        public SymmetryScr(IntPtr PreviewWndHandle) : this()
+        {
+            //Set the preview window as the parent of this window
+            SetParent(this.Handle, PreviewWndHandle);
+
+            //Make this a child window so it will close when parent closes
+            SetWindowLong(this.Handle, -16, new IntPtr(GetWindowLong(this.Handle, -16) | 0x40000000));
+
+            Rectangle ParentRect;
+            GetClientRect(PreviewWndHandle, out ParentRect);
+            Size = ParentRect.Size;
+            Location = new Point(0, 0);
+            //Let's hope bounds changes itself
+
+            previewMode = true;
+        }
+
         private void SymmetryScr_Load(object sender, EventArgs e)
         {
             //When the form loads, we'll want to hide cursor etc
-            Cursor.Hide();
-            TopMost = true;
+            if (!previewMode)
+            {
+                Cursor.Hide();
+                TopMost = true;
+            }
+
+            Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("SOFTWARE\\SymmetryScreensaver");
 
             //Setup graph
             graph = new Animation(Bounds.Width / 2, 0);
             graph.CreateStdGraph(Bounds.Width, Bounds.Height);
             graphics = this.CreateGraphics();
-            graph.SetColor(Edge.Colors.BLUE);
-            graph.SetThickness(0.05f);
+
+            if(key != null)
+            {
+                object colorValue = key.GetValue("colour");
+                object thicknessValue = key.GetValue("thickness");
+
+                if(colorValue != null)
+                {
+                    //Casting from STRING to edge's colors
+                    graph.SetColor((Edge.Colors)Enum.Parse(typeof(Edge.Colors), (string)colorValue));
+                }
+                else
+                {
+                    graph.SetColor(Edge.Colors.BLUE);
+                }
+
+                if(thicknessValue != null)
+                {
+                    graph.SetThickness(float.Parse((string)key.GetValue("thickness")));
+                }
+                else
+                {
+                    graph.SetThickness(0.05f);
+                }
+            }
+            else
+            {
+                graph.SetColor(Edge.Colors.BLUE);
+                graph.SetThickness(0.05f);
+            }
             graph.EnableColorChange(true);
 
             DoubleBuffered = true;
@@ -53,17 +120,19 @@ namespace SymmetryScreensaver
 
         private void SymmetryScr_MouseClick(object sender, MouseEventArgs e)
         {
-            Application.Exit();
+            if(!previewMode)
+                Application.Exit();
         }
 
         private void SymmetryScr_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Application.Exit();
+            if (!previewMode)
+                Application.Exit();
         }
 
         private void SymmetryScr_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!mousePos.IsEmpty)
+            if (!mousePos.IsEmpty && !previewMode)
             {
                 const int threshold = 3;
                 if (Math.Abs(mousePos.X - e.X) > threshold ||

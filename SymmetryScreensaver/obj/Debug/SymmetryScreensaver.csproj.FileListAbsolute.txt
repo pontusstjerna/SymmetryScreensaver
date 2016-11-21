@@ -7,3 +7,4 @@ F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Debu
 F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Debug\SymmetryScreensaver.csproj.GenerateResource.Cache
 F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Debug\SymmetryScreensaver.exe
 F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Debug\SymmetryScreensaver.pdb
+F:\Projekt\Programmering\C#.net\SymmetryScreensaver\SymmetryScreensaver\obj\Debug\SymmetryScreensaver.Settings.resources

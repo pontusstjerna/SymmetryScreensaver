@@ -35,13 +35,31 @@ namespace SymmetryScreensaver
                 switch (fstArg)
                 {
                     case "/c": //Config mode
-                        //TODO
+                        Application.Run(new Settings());
                         break;
                     case "/p": //Preview mode
-                        //Todo
+                        if(sndArg == null)
+                        {
+                            MessageBox.Show("Oh but you just can't do that! Preview window is expected here.", "Symmetry Screensaver", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                        else
+                        {
+                            try
+                            {
+                                //Either 64 or 32-bit depending on system, so its an int of varying size here
+                                IntPtr previewWndHandle = new IntPtr(long.Parse(sndArg));
+                                Application.Run(new SymmetryScr(previewWndHandle));
+                            }
+                            catch (FormatException e)
+                            {
+                                MessageBox.Show("Ops, your arguments are invalid.", "Symmetry Screensaver", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            }
+                            
+                        }
                         break;
                     case "/s": //Fullscreen mode
                         ShowScreenSaver();
+                        //Run program without the form :o
                         Application.Run();
                         break;
                     default:
@@ -51,7 +69,7 @@ namespace SymmetryScreensaver
             }
             else //No arguments, default to /c
             {
-                //TODO
+                Application.Run(new Settings());
             }
             
         }
